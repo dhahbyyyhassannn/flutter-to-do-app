@@ -20,16 +20,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => SwitchThemeBlocBloc(),
+      create: (context) => di.sl<SwitchThemeBlocBloc>(),
       child: BlocBuilder<SwitchThemeBlocBloc, SwitchThemeBlocState>(
         builder: (context, state) {
-
-
           return MaterialApp.router(
-            title: 'Flutter Demo',
-            themeMode: state.themeValue ? ThemeMode.light : ThemeMode.dark,
-            theme: AppThemes.appThemeData[AppTheme.lightTheme],
-            darkTheme: AppThemes.appThemeData[AppTheme.darkTheme],
+            title: 'Flutter App',
+            debugShowCheckedModeBanner: false,
+            theme: state.themeValue ? AppThemes.appThemeData[AppTheme.lightTheme]
+              : AppThemes.appThemeData[AppTheme.darkTheme],
             routerConfig: di.sl<AppRouter>().router,
           );
         },
